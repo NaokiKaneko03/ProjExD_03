@@ -166,6 +166,7 @@ def main():
             if beam._rct.colliderect(bomb._rct):
                 beam = None
                 bomb = None
+                bird.change_img(6, screen) #工科トン喜ぶ
         pg.display.update()
         clock.tick(1000)
 
