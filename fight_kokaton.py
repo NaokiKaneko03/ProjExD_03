@@ -57,6 +57,7 @@ class Bird:
         self._img = self._imgs[(+1, 0)]   # デフォルトで右      
         self._rct = self._img.get_rect()
         self._rct.center = xy
+        
 
     def change_img(self, num: int, screen: pg.Surface):
         """
@@ -126,9 +127,9 @@ class Beam:
     ビームに関するクラス
     """
     def __init__(self, bird: Bird):
-        """
-        割愛
-        """
+        
+        
+        
         self._img = pg.transform.rotozoom(pg.image.load(f"ex03/fig/beam.png"), 0, 2.0)  # 画像surface
         self._rct = self._img.get_rect()  # 画像surfaceに対応したrect
         self._rct.left = bird._rct.right  # こうかとんの右側にビームの左側を合わせる
@@ -145,6 +146,9 @@ class Beam:
 
 
 def main():
+    def __init__(self, score):
+        self.score   = score #スコア
+
     pg.display.set_caption("たたかえ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     clock = pg.time.Clock()
@@ -155,6 +159,10 @@ def main():
     beam = None
 
     tmr = 0
+    score = 0
+    font1 = pg.font.SysFont(None, 20) #フォントを用意
+    text1 = font1.render("score", True, (255, 0, 0)) #テキストの設定
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -164,7 +172,7 @@ def main():
 
         tmr += 1
         screen.blit(bg_img, [0, 0])
-        
+        screen.blit(text1, (40, 30)) #テキストを描画
         
         for bomb in bombs:
             bomb.update(screen)
@@ -182,10 +190,23 @@ def main():
             beam.update(screen)
             for i, bomb in enumerate(bombs):
                 if beam._rct.colliderect(bomb._rct):
+                    
                     beam = None
                     del bombs[i]
                     bird.change_img(6, screen)
+                    score += 1
+                    ### スコア計算
+                    self.score.cal_score(1) 
+                    pg.display.update()
                     break
+        """
+        
+        for event in pg.event.get():
+            if event.type == quit:  # 終了イベント
+                running = False
+                pg.quit()  #pygameのウィンドウを閉じる
+                sys.exit() #システム終了
+        """ 
 
         pg.display.update()
         clock.tick(1000)
@@ -195,4 +216,4 @@ if __name__ == "__main__":
     pg.init()
     main()
     pg.quit()
-    sys.exit()
+    sys.exit()  
