@@ -186,7 +186,7 @@ def main():
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
 
-        if beam is not None:  # ビームが存在しているとき
+        if beam is not None:  # ビームが存在している時
             beam.update(screen)
             for i, bomb in enumerate(bombs):
                 if beam._rct.colliderect(bomb._rct):
@@ -194,9 +194,8 @@ def main():
                     beam = None
                     del bombs[i]
                     bird.change_img(6, screen)
-                    score += 1
-                    ### スコア計算
-                    self.score.cal_score(1) 
+                    score += 1 ### スコア計算
+                    # self.score.cal_score(1) 
                     pg.display.update()
                     break
         """
