@@ -194,7 +194,7 @@ def main():
                     beam = None
                     del bombs[i]
                     bird.change_img(6, screen)
-                    score += 1 ### スコア計算
+                    score += 1 ### スコア計算　　　　　まだ機能が完成していない
                     # self.score.cal_score(1) 
                     pg.display.update()
                     break
